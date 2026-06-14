@@ -32,3 +32,8 @@ AI-powered disease detection system using **EfficientNetV2** with **Grad-CAM++**
 1. Select a disease module
 2. Upload a medical image
 3. Get prediction + confidence scores + Grad-CAM heatmap
+## Model Weights
+Model weights are not stored in this repo due to size.
+Download from HuggingFace: https://huggingface.co/spaces/aathix/medscan-ai
+Place in: backend/models/weights/brain_mri_best.pt
+
