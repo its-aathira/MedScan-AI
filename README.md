@@ -31,12 +31,10 @@ An end-to-end AI system for medical image disease detection using **EfficientNet
 
 ## 🧠 Disease Modules
 
-| Module | Classes | Status |
-|---|---|---|
 | Brain MRI | Glioma · Meningioma · Pituitary · No Tumor | ✅ Live |
-| Chest X-Ray | Pneumonia · COVID-19 · Tuberculosis · Normal | 🔜 Coming soon |
-| Skin Lesion | Melanoma · Nevus · Carcinoma · 4 more | 🔜 Coming soon |
-| Diabetic Retinopathy | 5-stage DR grading | 🔜 Coming soon |
+| Chest X-Ray | Pneumonia · COVID-19 · Tuberculosis · Normal | ✅ Live |
+| Skin Lesion | Melanoma · Nevus · Carcinoma · 4 more | ✅ Live |
+| Diabetic Retinopathy | 5-stage DR grading | ✅ Live |
 
 ---
 
@@ -48,6 +46,11 @@ An end-to-end AI system for medical image disease detection using **EfficientNet
 | Macro AUC | **99.63%** |
 | Best Val AUC | **99.85%** |
 | Macro F1 | **96.18%** |
+
+| Chest X-Ray Accuracy | 93.55% |
+| Chest X-Ray AUC | 99.08% |
+| Skin Lesion AUC | 90.59% |
+| Retinal AUC | 88.03% |
 
 **Per-class results:**
 
