@@ -21,21 +21,38 @@ class ModelRegistry:
         self.predictors   : Dict[str, MedicalPredictor] = {}
 
     def load_available(self):
-        """Scans weights directory and loads all available models."""
-        print(f"  Scanning for model weights in: {self.weights_dir}")
+        from huggingface_hub import hf_hub_download
+        import os
+    
+        print(f"  Downloading model weights from HuggingFace...")
+        self.weights_dir.mkdir(parents=True, exist_ok=True)
+    
         for module_key in MODULES:
-            ckpt = self.weights_dir / f"{module_key}_best.pt"
-            if ckpt.exists():
+            filename = f"{module_key}_best.pt"
+            ckpt = self.weights_dir / filename
+        
+            if not ckpt.exists():
                 try:
-                    self.predictors[module_key] = MedicalPredictor(
-                        module_key      = module_key,
-                        checkpoint_path = str(ckpt),
+                    print(f"  ⬇  Downloading {filename}...")
+                    hf_hub_download(
+                    repo_id="aathix/medscan-ai-weights",
+                    filename=filename,
+                    local_dir=str(self.weights_dir),
+                    token=os.getenv("HF_TOKEN"),
                     )
+                    print(f"  ✓  {filename} downloaded")
                 except Exception as e:
-                    print(f"  ⚠  Failed to load {module_key}: {e}")
-            else:
-                print(f"  ⚠  No checkpoint found for {module_key} ({ckpt})")
-
+                    print(f"  ⚠  Failed to download {module_key}: {e}")
+                    continue
+        
+            try:
+                self.predictors[module_key] = MedicalPredictor(
+                    module_key=module_key,
+                    checkpoint_path=str(ckpt),
+                )
+            except Exception as e:
+                print(f"  ⚠  Failed to load {module_key}: {e}")
+    
         print(f"\n  Loaded modules: {list(self.predictors.keys())}")
 
     def get(self, module_key: str) -> Optional[MedicalPredictor]:

@@ -113,10 +113,10 @@ def build_loss(
     retinal      → ordinal classes  → FocalLoss + label smoothing
     """
     gamma_map = {
-        "brain_mri"   : 1.5,
-        "chest_xray"  : 2.0,
-        "skin_lesion" : 2.5,
-        "retinal"     : 2.0,
+    "brain_mri"   : 1.5,
+    "chest_xray"  : 2.0,
+    "skin_lesion" : 1.5,
+    "retinal"     : 1.0,
     }
     gamma = gamma_map.get(module_key, focal_gamma)
 
